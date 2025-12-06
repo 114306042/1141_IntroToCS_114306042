@@ -15,50 +15,45 @@
     <div id="image"></div>
 
     <script>
-        // 1. 初始化遊戲變數
-        // 要求：隨機產生 1-100 的數字 [cite: 40]
+
         var answer = Math.floor(Math.random() * 100) + 1;
-        // 要求：最大嘗試次數為 7 [cite: 28, 41]
+
         var chances = 7;
         var min = 1;
         var max = 100;
         var isWin = false;
 
-        // 2. 遊戲迴圈
-        // 要求：當還有機會時繼續執行 [cite: 42]
+
         while (chances > 0) {
-            // 要求：使用 prompt 讓使用者輸入，並顯示範圍與剩餘次數 [cite: 26, 30]
+  
             var input = window.prompt(`請輸入 ${min} 到 ${max} 之間的整數。\n你還有 ${chances} 次機會。`);
 
-            // 處理取消按鈕 (避免錯誤)
+
             if (input === null) {
                 break; 
             }
 
             var guess = Number(input.trim());
 
-            // 要求：驗證輸入是否為空、是否為數字、是否在有效範圍內 [cite: 36, 48]
             if (input.trim() === "" || isNaN(guess) || guess < min || guess > max) {
-                // 要求：無效輸入使用 alert 提醒 [cite: 37]
+
                 alert("請輸入有效範圍內的數字(不能超出" + min + "到" + max + ")!");
-                continue; // 此次不扣除次數 (根據邏輯通常無效輸入不扣次數，或可自行決定)
+                continue; 
             }
 
-            // 檢查答案
             if (guess === answer) {
-                // 要求：猜對時使用 alert 通知 [cite: 34]
+
                 alert("恭喜你答對了! 正確答案是 " + answer);
-                
-                // 要求：猜對時插入 correct.jpg [cite: 33, 52]
+          
                 document.getElementById("image").innerHTML = '<img src="images/correct.jpg" alt="correct">';
                 isWin = true;
                 break;
             } else {
-                // 猜錯，扣除次數
+    
                 chances--;
                 
                 if (chances > 0) {
-                    // 更新提示範圍 (雖然題目沒強制要求縮小範圍邏輯，但這是標準猜數字玩法)
+        
                     if (guess > answer) {
                         max = guess - 1;
                     } else {
@@ -68,12 +63,11 @@
             }
         }
 
-        // 3. 遊戲結束處理 (失敗)
-        // 要求：當次數歸零且未猜對，顯示 wrong.jpg 並告知正確答案 [cite: 33, 35]
         if (!isWin && chances === 0) {
             alert("遊戲結束！正確答案是 " + answer);
             document.getElementById("image").innerHTML = '<img src="images/wrong.jpg" alt="wrong">';
         }
     </script>
 </body>
+
 </html>
